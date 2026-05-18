@@ -19,7 +19,7 @@ export default function LoginPage() {
   const searchParams = useSearchParams()
   const callbackUrl = searchParams.get('callbackUrl') || '/'
   const [loading, setLoading] = useState(false)
-  const { status } = useSession()
+  const { data: session, status } = useSession()
 
   // Redirect if already logged in
   useEffect(() => {

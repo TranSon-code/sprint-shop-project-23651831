@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { supabase } from '@/lib/supabase'
-import { Search, Edit, Eye, X, Check } from 'lucide-react'
+import { updateOrderStatus } from './actions'
 
 export default function AdminOrders() {
   const [orders, setOrders] = useState([])
@@ -39,15 +39,11 @@ export default function AdminOrders() {
   const handleUpdateStatus = async (orderId, newStatus) => {
     setUpdatingId(orderId)
     try {
-      const { error } = await supabase
-        .from('orders')
-        .update({ status: newStatus })
-        .eq('id', orderId)
-      
-      if (!error) {
-        setOrders(orders.map(o => o.id === orderId ? { ...o, status: newStatus } : o))
-      }
+      await updateOrderStatus(orderId, newStatus)
+      setOrders(orders.map(o => o.id === orderId ? { ...o, status: newStatus } : o))
+      alert('Cập nhật trạng thái thành công!')
     } catch (err) {
+      alert('Lỗi cập nhật: ' + err.message)
       console.error(err)
     } finally {
       setUpdatingId(null)
