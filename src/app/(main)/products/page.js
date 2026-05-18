@@ -1,3 +1,4 @@
+import { Suspense } from 'react'
 import { createServerClient } from '@/lib/supabase'
 import ProductsClient from './ProductsClient'
 
@@ -123,7 +124,9 @@ export default async function ProductsPage({ searchParams }) {
   return (
     <div style={{ background: '#f9fafb', minHeight: '100vh', padding: '2rem 0' }}>
       <div className="container">
-        <ProductsClient initialData={initialData} initialParams={params} />
+        <Suspense fallback={<div style={{ padding: '40px', textAlign: 'center' }}>Đang tải sản phẩm...</div>}>
+          <ProductsClient initialData={initialData} initialParams={params} />
+        </Suspense>
       </div>
     </div>
   )
