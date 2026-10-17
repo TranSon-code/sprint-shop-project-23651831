@@ -118,6 +118,8 @@ function BrandsSection({ brands }) {
               >
                 {brand.logo_url ? (
                   <img src={brand.logo_url} alt={brand.name}
+                    loading="lazy"
+                    decoding="async"
                     style={{ width: '100%', maxWidth: '80px', height: '40px', objectFit: 'contain', filter: 'brightness(0) invert(1)' }} />
                 ) : (
                   <span style={{ color: '#fff', fontWeight: 800, fontSize: '1rem', textAlign: 'center' }}>{brand.name}</span>
@@ -163,6 +165,8 @@ export default function HomeClient({ carouselBanners, promoBanner, brands, newPr
             <img
               src={promoBanner.image_url}
               alt={promoBanner.subtitle || 'Khuyến mãi'}
+              loading="lazy"
+              decoding="async"
               style={{ width: '100%', display: 'block', objectFit: 'cover' }}
             />
           </div>
@@ -186,6 +190,8 @@ export default function HomeClient({ carouselBanners, promoBanner, brands, newPr
             <img
               src={newArrivalBannerUrl}
               alt="New Arrival"
+              loading="lazy"
+              decoding="async"
               style={{ width: '100%', display: 'block', objectFit: 'cover' }}
               onError={e => { e.target.style.display = 'none' }}
             />
